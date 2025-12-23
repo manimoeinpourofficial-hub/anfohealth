@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>ANFO — نمایش محصولات</title>
-<meta name="description" content="ANFO — نمایش تصویری محصولات سلامت و مکمل‌های گیاهی." />
+<title>ANFO — نمایش محصولات و درباره ما</title>
+<meta name="description" content="ANFO — نمایش تصویری محصولات سلامت و مکمل‌های گیاهی. صفحهٔ تک‌صفحه‌ای با محصولات و درباره ما." />
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -15,57 +15,74 @@
     --muted:#7b858b;
     --text:#0b1220;
     --radius:12px;
+    --border:#e8ebee;
   }
   *{box-sizing:border-box}
   body{
     margin:0;font-family:"Vazirmatn",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
     background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;
   }
+
+  /* Header */
   header{
-    position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:12px 18px;
-    background:rgba(255,255,255,0.85);backdrop-filter:blur(4px);border-bottom:1px solid #e6e9ec;z-index:40;
+    position:sticky;top:0;z-index:40;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:12px 18px;background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(4px);border-bottom:1px solid var(--border);
   }
   .brand{display:flex;align-items:center;gap:12px}
-  .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(180deg,var(--accent),var(--primary));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .logo{
+    width:44px;height:44px;border-radius:10px;
+    background:linear-gradient(180deg,var(--accent),var(--primary));
+    color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;
+  }
   nav{display:flex;gap:12px;align-items:center}
   nav a{color:var(--text);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px}
   nav a:hover{background:rgba(0,0,0,0.04)}
 
-  .container{max-width:1100px;margin:28px auto;padding:0 16px}
+  .container{max-width:1100px;margin:24px auto;padding:0 16px}
 
   /* Hero */
-  .hero{display:flex;gap:20px;align-items:center;justify-content:space-between;margin-bottom:22px}
+  .hero{display:flex;gap:20px;align-items:center;justify-content:space-between;margin-bottom:18px}
   .hero .left{flex:1}
   .hero h1{margin:0 0 8px;font-size:28px;color:var(--primary)}
   .hero p{margin:0;color:var(--muted);font-size:14px;max-width:640px}
-
   .cta{display:flex;gap:10px;margin-top:12px}
   .btn{background:var(--primary);color:#fff;padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
   .btn.ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--text)}
 
   /* Grid */
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+  .section-head{display:flex;justify-content:space-between;align-items:center;margin:0 0 10px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
   .card{
-    background:var(--card);border-radius:var(--radius);overflow:hidden;border:1px solid #eef1f3;
+    background:var(--card);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);
     transition:transform .18s ease,box-shadow .18s ease;cursor:pointer;
   }
-  .card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 18px 40px rgba(16,24,40,0.08)}
-  .media{height:180px;overflow:hidden;background:#f0f2f4}
-  .media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
-  .card:hover .media img{transform:scale(1.04)}
+  .card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 16px 34px rgba(16,24,40,0.08)}
+  .media{height:170px;overflow:hidden;background:#f0f2f4}
+  .media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+  .card:hover .media img{transform:scale(1.03)}
   .body{padding:12px}
   .body h3{margin:0 0 6px;font-size:16px;color:var(--primary)}
   .body p{margin:0;color:var(--muted);font-size:13px}
+  .price{margin-top:8px;font-weight:700;color:var(--accent)}
 
-  /* Lightbox (simple) */
+  /* About */
+  #about .card{border:1px solid var(--border)}
+  .about-text{color:var(--muted);font-size:14px;line-height:1.8}
+
+  /* Lightbox (minimal) */
   .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:80;padding:16px}
   .lightbox.show{display:flex}
   .lb{max-width:900px;width:100%;background:#fff;border-radius:10px;overflow:hidden}
-  .lb .top{display:flex;gap:12px;padding:12px;align-items:center;justify-content:space-between;border-bottom:1px solid #eef1f3}
+  .lb .top{display:flex;gap:12px;padding:12px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
   .lb .content{display:flex;gap:12px;padding:12px}
   .lb img{width:60%;height:360px;object-fit:cover;border-radius:8px}
   .lb .info{flex:1}
   .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:#f3f6f8;color:var(--muted);font-size:13px;margin-bottom:8px}
+
+  /* Footer */
+  footer{padding:22px 16px;color:var(--muted);border-top:1px solid var(--border);margin-top:22px}
 
   /* Responsive */
   @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:24px}}
@@ -79,13 +96,12 @@
     <div class="logo">AN</div>
     <div>
       <div style="font-weight:700">ANFO</div>
-      <div style="font-size:12px;color:var(--muted)">نمایش محصولات</div>
+      <div style="font-size:12px;color:var(--muted)">نمایش محصولات و درباره ما</div>
     </div>
   </div>
   <nav>
     <a href="#products">محصولات</a>
-    <a href="#trust">نمادها</a>
-    <a href="#about">درباره</a>
+    <a href="#about">درباره ما</a>
   </nav>
 </header>
 
@@ -93,64 +109,99 @@
   <section class="hero" id="hero">
     <div class="left">
       <h1>محصولات ANFO</h1>
-      <p>نمایش تصویری و اطلاعات پایهٔ محصولات. برای هر محصول چند تصویر و اطلاعات فنی قابل مشاهده است.</p>
+      <p>نمایش ساده و سریع محصولات با قیمت و تصویر. برای جزئیات هر محصول روی کارت کلیک کنید.</p>
       <div class="cta">
         <button class="btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">مشاهده محصولات</button>
-        <button class="btn ghost" onclick="document.getElementById('trust').scrollIntoView({behavior:'smooth'})">نمادها</button>
+        <button class="btn ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">درباره ما</button>
       </div>
-    </div>
-    <div style="width:320px">
-      <div style="background:#fff;border-radius:10px;padding:12px;border:1px solid #eef1f3">
-        <div style="font-weight:700">نماد اعتماد</div>
-        <div style="color:var(--muted);font-size:13px;margin-top:6px">شماره: ۱۲۳۴۵۶۷</div>
-      </div>
+      <div style="margin-top:10px;color:var(--muted);font-size:12px">اعلان: اطلاعات این صفحه اطلاع‌رسانی است و جایگزین مشاوره پزشکی نیست.</div>
     </div>
   </section>
 
+  <!-- Products -->
   <section id="products">
-    <div style="display:flex;justify-content:space-between;align-items:center">
+    <div class="section-head">
       <h2 style="margin:0">محصولات</h2>
-      <div style="color:var(--muted);font-size:13px">برای جزئیات روی کارت کلیک کنید</div>
+      <div style="color:var(--muted);font-size:13px">کلیک روی کارت = مشاهده جزئیات</div>
     </div>
 
     <div class="grid" id="grid">
-      <!-- نمونه کارت: آدرس تصاویر را با تصاویر خودت جایگزین کن -->
-      <article class="card" data-name="قرص لاغری ANFO" data-images='["/images/weight1.jpg","/images/weight2.jpg"]' data-ingredients="عصاره گیاهان طبیعی">
-        <div class="media"><img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?q=80&w=1200&auto=format&fit=crop" alt="قرص لاغری" loading="lazy"></div>
+      <!-- تصاویر را با آدرس‌های واقعی خودت جایگزین کن -->
+      <article class="card" data-name="کپسول لاغری" data-images='["/images/weight1.jpg"]' data-ingredients="عصاره گیاهان طبیعی">
+        <div class="media"><img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?q=80&w=1200&auto=format&fit=crop" alt="کپسول لاغری" loading="lazy"></div>
         <div class="body">
-          <h3>قرص لاغری ANFO</h3>
-          <p>کنترل اشتها و افزایش متابولیسم با ترکیبات گیاهی.</p>
+          <h3>کپسول لاغری</h3>
+          <p>کنترل اشتها و افزایش متابولیسم.</p>
+          <div class="price">۱,۵۰۰,۰۰۰ تومان</div>
         </div>
       </article>
 
-      <article class="card" data-name="مکمل افزایش وزن" data-images='["/images/gain1.jpg"]' data-ingredients="پروتئین گیاهی">
-        <div class="media"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop" alt="مکمل افزایش وزن" loading="lazy"></div>
+      <article class="card" data-name="مکمل چاقی" data-images='["/images/gain1.jpg"]' data-ingredients="پروتئین گیاهی">
+        <div class="media"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop" alt="مکمل چاقی" loading="lazy"></div>
         <div class="body">
-          <h3>مکمل افزایش وزن</h3>
+          <h3>مکمل چاقی</h3>
           <p>افزایش وزن سالم و کنترل‌شده.</p>
+          <div class="price">۶۰۰,۰۰۰ تومان</div>
         </div>
       </article>
 
-      <article class="card" data-name="غضروف‌ساز" data-images='["/images/joint1.jpg"]' data-ingredients="گلوکوزامین">
-        <div class="media"><img src="https://images.unsplash.com/photo-1514996937319-344454492b37?q=80&w=1200&auto=format&fit=crop" alt="غضروف ساز" loading="lazy"></div>
+      <article class="card" data-name="پودر غضروف‌ساز" data-images='["/images/joint1.jpg"]' data-ingredients="گلوکوزامین">
+        <div class="media"><img src="https://images.unsplash.com/photo-1514996937319-344454492b37?q=80&w=1200&auto=format&fit=crop" alt="پودر غضروف ساز" loading="lazy"></div>
         <div class="body">
-          <h3>غضروف‌ساز</h3>
+          <h3>پودر غضروف‌ساز</h3>
           <p>حمایت از مفاصل و بازتوانی.</p>
+          <div class="price">۱,۵۰۰,۰۰۰ تومان</div>
         </div>
       </article>
 
-      <!-- کارت‌های بیشتر را مشابه اضافه کن -->
+      <article class="card" data-name="محصول ترک اعتیاد" data-images='["/images/addiction1.jpg"]' data-ingredients="ترکیبات حمایتی">
+        <div class="media"><img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?q=80&w=1200&auto=format&fit=crop" alt="ترک اعتیاد" loading="lazy"></div>
+        <div class="body">
+          <h3>ترک اعتیاد</h3>
+          <p>محصول حمایتی برای برنامه‌های ترک.</p>
+          <div class="price">۲,۰۰۰,۰۰۰ تومان</div>
+        </div>
+      </article>
+
+      <article class="card" data-name="تقویت قوای جنسی" data-images='["/images/sexual1.jpg"]' data-ingredients="ترکیبات حمایتی">
+        <div class="media"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop" alt="تقویت قوای جنسی" loading="lazy"></div>
+        <div class="body">
+          <h3>تقویت قوای جنسی</h3>
+          <p>محصول حمایتی؛ قبل از مصرف مشاوره پزشکی.</p>
+          <div class="price">۲,۰۰۰,۰۰۰ تومان</div>
+        </div>
+      </article>
+
+      <article class="card" data-name="پاکسازی کبد" data-images='["/images/liver1.jpg"]' data-ingredients="عصاره‌های گیاهی">
+        <div class="media"><img src="https://images.unsplash.com/photo-1558980664-10ecf53f2755?q=80&w=1200&auto=format&fit=crop" alt="پاکسازی کبد" loading="lazy"></div>
+        <div class="body">
+          <h3>داروی پاکسازی کبد</h3>
+          <p>حمایت از عملکرد طبیعی کبد.</p>
+          <div class="price">۴۰۰,۰۰۰ تومان</div>
+        </div>
+      </article>
+
+      <article class="card" data-name="ریزش مو و تقویت مو" data-images='["/images/hair1.jpg"]' data-ingredients="ترکیبات تقویتی">
+        <div class="media"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop" alt="تقویت مو" loading="lazy"></div>
+        <div class="body">
+          <h3>ریزش مو و تقویت مو</h3>
+          <p>کمک به تقویت و سلامت مو.</p>
+          <div class="price">۶۰۰,۰۰۰ تومان</div>
+        </div>
+      </article>
     </div>
   </section>
 
-  <section id="trust" style="margin-top:28px">
-    <h3 style="margin:0 0 8px">نمادها و مجوزها</h3>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px">
-      <div style="background:#fff;padding:12px;border-radius:10px;border:1px solid #eef1f3;min-width:200px">
-        <strong>نماد اعتماد</strong><div style="color:var(--muted);font-size:13px;margin-top:6px">شماره: ۱۲۳۴۵۶۷</div>
-      </div>
-      <div style="background:#fff;padding:12px;border-radius:10px;border:1px solid #eef1f3;min-width:200px">
-        <strong>پروانه بهداشت</strong><div style="color:var(--muted);font-size:13px;margin-top:6px">شماره: ۹۸۷۶۵۴</div>
+  <!-- About -->
+  <section id="about" style="margin-top:26px">
+    <div class="section-head">
+      <h2 style="margin:0">درباره ما</h2>
+    </div>
+    <div class="card">
+      <div class="body">
+        <p class="about-text">
+          ANFO مجموعه‌ای از محصولات سلامت و مکمل‌های گیاهی را به‌صورت شفاف و ساده معرفی می‌کند. هدف ما ارائه‌ی اطلاعات روشن درباره‌ی هر محصول—از تصاویر واقعی تا ترکیبات و قیمت—برای تصمیم‌گیری آگاهانه است. این سایت برای نمایش و اطلاع‌رسانی طراحی شده و خدمات فروش ارائه نمی‌دهد. اگر درباره‌ی مصرف هر محصول سؤال دارید، با متخصصان مربوطه مشورت کنید.
+        </p>
       </div>
     </div>
   </section>
@@ -173,10 +224,16 @@
   </div>
 </div>
 
+<footer>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;max-width:1100px;margin:0 auto;">
+    <div>© 2025 ANFO</div>
+    <div style="font-size:13px">تهران، ایران — info@anfo.com</div>
+  </div>
+</footer>
+
 <script>
-  // باز کردن لایت‌باکس با تصاویر ساده
-  function openLightbox(btn){
-    const card = btn.closest ? btn.closest('.card') : btn.parentElement.closest('.card');
+  // باز کردن لایت‌باکس با تصویر اول کارت
+  function openLightboxFromCard(card){
     if(!card) return;
     const imgs = JSON.parse(card.dataset.images || '[]');
     const title = card.dataset.name || card.querySelector('h3')?.innerText || '';
@@ -197,17 +254,15 @@
     document.getElementById('lightbox').classList.remove('show');
     document.getElementById('lightbox').setAttribute('aria-hidden','true');
   }
-
-  // افزودن رویداد کلیک به کارت‌ها (برای باز کردن لایت‌باکس)
+  // کلیک روی کارت = باز شدن لایت‌باکس
   document.querySelectorAll('.card').forEach(card=>{
     card.addEventListener('click', (e)=>{
-      // اگر روی لینک یا دکمه کلیک شد، نادیده بگیر
-      if(e.target.tagName.toLowerCase() === 'a' || e.target.tagName.toLowerCase() === 'button') return;
-      openLightbox(card);
+      // جلوگیری از تداخل با دکمه‌ها یا لینک‌ها
+      if(['a','button'].includes(e.target.tagName.toLowerCase())) return;
+      openLightboxFromCard(card);
     });
   });
-
-  // بستن با ESC یا کلیک روی بک‌دراپ
+  // بستن با بک‌دراپ یا ESC
   document.getElementById('lightbox').addEventListener('click', (e)=>{ if(e.target.id === 'lightbox') closeLightbox(); });
   window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLightbox(); });
 </script>
